@@ -8,6 +8,7 @@ RUN apt-get update && \
     wget \
     unzip \
     curl \
+    maven \
     python3 \
     python3-venv \
     python3-full && \
