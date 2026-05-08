@@ -1,0 +1,8 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+.env
+secrets/
+jenkins_home/
+volumes/
+logs/

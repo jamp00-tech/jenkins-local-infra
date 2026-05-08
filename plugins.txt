@@ -1,0 +1,54 @@
+#Folders
+cloudbees-folder
+
+# Pipeline y visualización
+workflow-aggregator:latest
+pipeline-stage-view:latest
+pipeline-graph-view:latest
+blueocean:latest
+
+# Git y SCM
+git:latest
+github:latest
+github-branch-source:latest
+
+# Credenciales
+credentials:latest
+credentials-binding:latest
+plain-credentials:latest
+
+# Terraform
+terraform:latest
+
+# Docker
+docker-workflow:latest
+docker-plugin:latest
+
+# Build y herramientas
+build-timeout:latest
+timestamper:latest
+ws-cleanup:latest
+
+# Notificaciones
+mailer:latest
+slack:latest
+
+# Calidad y análisis
+junit:latest
+jacoco:latest
+sonar:latest
+
+# Utilidades
+config-file-provider:latest
+envinject:latest
+parameterized-trigger:latest
+promoted-builds:latest
+
+# Seguridad
+role-strategy:latest
+matrix-auth:latest
+
+# Otros
+ant:latest
+maven-plugin:latest
+gradle:latest

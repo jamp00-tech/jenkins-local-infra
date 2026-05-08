@@ -1,0 +1,13 @@
+services:
+  jenkins:
+    build: .
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./Oracle_Cloud_Infrastructure/oci-server:/terraform
+      - ./Oracle_Cloud_Infrastructure/.oci:/home/jenkins/.oci
+
+volumes:
+  jenkins_home:
