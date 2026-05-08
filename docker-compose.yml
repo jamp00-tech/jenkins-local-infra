@@ -8,6 +8,7 @@ services:
       - jenkins_home:/var/jenkins_home
       - ./Oracle_Cloud_Infrastructure/oci-server:/terraform
       - ./Oracle_Cloud_Infrastructure/.oci:/home/jenkins/.oci
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   jenkins_home:
