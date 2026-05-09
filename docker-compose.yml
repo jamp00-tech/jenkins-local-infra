@@ -2,6 +2,10 @@ services:
   jenkins:
     build: .
     restart: unless-stopped
+    group_add:
+      # DOCKER_GID is injected from terraform cloud-init (terraform-compute-runtime.git) during docker compose startup
+      - "${DOCKER_GID}"
+
     ports:
       - "8080:8080"
       - "50000:50000"
