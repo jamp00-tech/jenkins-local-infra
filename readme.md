@@ -35,6 +35,50 @@ Jenkins uses the host Docker daemon through:
 
 This allows Jenkins to build, push, pull and run Docker images.
 
+**Docker socket permissions (important)**
+
+Jenkins does **not** run as root and does **not** use `chmod 666` on the Docker socket.
+
+The Docker socket usually belongs to the host `docker` group:
+
+```bash
+ls -l /var/run/docker.sock
+```
+
+Example:
+
+```text
+srw-rw---- root docker
+```
+
+The Docker group ID can vary between Linux distributions or new VM recreations.
+
+For that reason, the group ID is dynamically calculated in the Terraform repository (`terraform-compute-runtime`, `\envs\oci\local\cloud-init`) during VM bootstrap:
+
+```yaml
+DOCKER_GID=$(getent group docker | cut -d: -f3)
+```
+
+Then Terraform cloud-init starts Jenkins passing that value into Docker Compose:
+
+```yaml
+DOCKER_GID=$DOCKER_GID docker compose up -d --build
+```
+
+This repository consumes that value in `docker-compose.yml`:
+
+```yaml
+group_add:
+  - "${DOCKER_GID}"
+```
+
+Why this approach?
+
+- avoids running Jenkins as root
+- avoids insecure `chmod 666`
+- survives VM recreation
+- keeps Docker socket permissions correct after re-provisioning
+
 **Repositories**
 
 Jenkins infrastructure repo:
@@ -145,4 +189,3 @@ Terraform
 → OCIR
 → Deploy pipeline
 ```
-
