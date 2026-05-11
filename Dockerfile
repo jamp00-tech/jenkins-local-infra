@@ -16,10 +16,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Terraform
-RUN wget https://releases.hashicorp.com/terraform/1.7.0/terraform_1.7.0_linux_amd64.zip && \
-    unzip terraform_1.7.0_linux_amd64.zip && \
+ENV TERRAFORM_VERSION=1.14.7
+
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_arm64.zip && \
+    unzip terraform_${TERRAFORM_VERSION}_linux_arm64.zip && \
     mv terraform /usr/local/bin/ && \
-    rm terraform_1.7.0_linux_amd64.zip
+    rm terraform_${TERRAFORM_VERSION}_linux_arm64.zip
 
 # OCI CLI
 RUN curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install_oci.sh && \
