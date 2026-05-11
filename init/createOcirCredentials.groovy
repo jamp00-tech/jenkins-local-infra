@@ -26,7 +26,7 @@ def readSecret(String secretId) {
           --auth instance_principal \
           --secret-id ${secretId} \
           --query 'data."secret-bundle-content".content' \
-          --raw-output | base64 -d
+          --raw-output 2>/dev/null | base64 -d
     """)
 }
 
