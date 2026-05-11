@@ -16,5 +16,9 @@ services:
       - ./Oracle_Cloud_Infrastructure/.oci:/home/jenkins/.oci
       - /var/run/docker.sock:/var/run/docker.sock
 
+    environment:
+      OCIR_USERNAME_SECRET_ID: "ocid1.vaultsecret.oc1.sa-saopaulo-1.amaaaaaau34wsoyae6hmjkptpanbhoe4dppxwi63dxqc5fswcupfwregmr4a"
+      OCIR_TOKEN_SECRET_ID: "ocid1.vaultsecret.oc1.sa-saopaulo-1.amaaaaaau34wsoyarbtqp46txzcuejb6jz64ands33umbkhblmhlv3qgbe5a"
+
 volumes:
   jenkins_home:
