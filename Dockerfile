@@ -12,8 +12,8 @@ RUN apt-get update && \
     docker.io \
     python3 \
     python3-venv \
-    python3-full && \
-    jq  && \
+    python3-full \
+    jq && \
     rm -rf /var/lib/apt/lists/*
 
 # Terraform
