@@ -13,6 +13,7 @@ RUN apt-get update && \
     python3 \
     python3-venv \
     python3-full && \
+    jq  && \
     rm -rf /var/lib/apt/lists/*
 
 # Terraform
