@@ -34,6 +34,7 @@ crearCarpeta = { String ruta ->
 def carpetas = [
     "pipelines/build",
     "pipelines/deploy",
+    "pipelines/network",
     "scripts/common",
     "scripts/docker",
     "scripts/git"
@@ -121,6 +122,48 @@ if (existingDeployJob == null) {
     println "ℹ️ Job ya existe: pipelines/deploy/${deployJobName}"
 }
 
+
+/************************************
+ * NETWORK JOB
+ ************************************/
+
+def networkFolderPath = "pipelines/network"
+crearCarpeta(networkFolderPath)
+
+def networkFolder = jenkins.getItemByFullName(networkFolderPath)
+
+def networkJobName = "network-deploy"
+
+def existingNetworkJob = networkFolder.getItem(networkJobName)
+
+if (existingNetworkJob == null) {
+    def job = networkFolder.createProject(WorkflowJob.class, networkJobName)
+
+    def scm = new GitSCM(
+        [new UserRemoteConfig(
+            "https://github.com/jamp00-tech/jenkins-pipelines.git",
+            null,
+            null,
+            null
+        )],
+        [new BranchSpec("*/main")],
+        false,
+        [],
+        null,
+        null,
+        []
+    )
+
+    def definition = new CpsScmFlowDefinition(scm, "network/Jenkinsfile")
+    definition.setLightweight(true)
+
+    job.setDefinition(definition)
+    job.save()
+
+    println "✅ Job creado: pipelines/network/${networkJobName}"
+} else {
+    println "ℹ️ Job ya existe: pipelines/network/${networkJobName}"
+}
 
 
 jenkins.save()
